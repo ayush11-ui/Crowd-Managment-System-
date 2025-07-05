@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowd Management Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Peace+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            overflow: auto;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .dashboard-header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 25px;
+            color: white;
+        }
+        
+        .demo-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        .demo-button {
+            background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-family: 'Peace Sans', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 195, 247, 0.3);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-online { background: #4CAF50; }
+        .status-warning { background: #FF9800; }
+        .status-critical { background: #F44336; }
+        
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-family: 'Peace Sans', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .terminal-output {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #00ff00;
+            height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+        <div class="shape shape4"></div>
+    </div>
+
+    <button class="logout-btn" onclick="logout()">Logout</button>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>🏟️ Crowd Management Dashboard</h1>
+            <p>Zone-based BFS Graph Traversal System</p>
+            <p id="welcomeMessage">Welcome, User!</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>System Status</h3>
+                <p><span class="status-indicator status-online"></span>All Systems Operational</p>
+                <p><span class="status-indicator status-online"></span>BFS Engine Active</p>
+                <p><span class="status-indicator status-online"></span>Zone Monitoring Online</p>
+                <p><span class="status-indicator status-warning"></span>1 Zone at High Capacity</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Quick Stats</h3>
+                <p><strong>Total Zones:</strong> 10</p>
+                <p><strong>Total Capacity:</strong> 2,250 people</p>
+                <p><strong>Current Occupancy:</strong> 1,240 people</p>
+                <p><strong>System Utilization:</strong> 55.1%</p>
+                <p><strong>Critical Zones:</strong> 1</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Recent Activity</h3>
+                <p>• Crowd redistribution: Section A → Section C</p>
+                <p>• Emergency route calculated for Section B</p>
+                <p>• Real-time monitoring activated</p>
+                <p>• BFS pathfinding completed successfully</p>
+                <p>• System performance: Optimal</p>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Interactive Demos</h2>
+            <p>Experience the power of our zone-based BFS crowd management system:</p>
+            
+            <button class="demo-button" onclick="runFullDemo()">🎬 Run Full Demo</button>
+            <button class="demo-button" onclick="runPathfindingDemo()">🔍 BFS Pathfinding Demo</button>
+            <button class="demo-button" onclick="runEvacuationDemo()">🚨 Emergency Evacuation</button>
+            <button class="demo-button" onclick="runMonitoringDemo()">📊 Real-time Monitoring</button>
+            <button class="demo-button" onclick="runSimulationDemo()">🎭 Crowd Flow Simulation</button>
+
+            <div class="terminal-output" id="terminalOutput">
+Welcome to Crowd Management System Terminal
+==========================================
+System initialized and ready for operations.
+Type commands or click demo buttons above to interact with the system.
+
+Available commands:
+- status: Show system status
+- zones: List all zones
+- simulate: Run crowd simulation
+- help: Show available commands
+
+> 
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration
+        const API_BASE_URL = window.location.origin + '/api';
+        
+        // API Helper function
+        async function makeAPICall(endpoint, options = {}) {
+            const token = localStorage.getItem('crowdManagementToken');
+            
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(token && { 'Authorization': `Bearer ${token}` })
+                },
+                ...options
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        // Token expired, redirect to login
+                        logout();
+                        return;
+                    }
+                    throw new Error(data.error || `HTTP error! status: ${response.status}`);
+                }
+                
+                return data;
+            } catch (error) {
+                console.error('API call failed:', error);
+                addToTerminal(`❌ API Error: ${error.message}`);
+                throw error;
+            }
+        }
+        
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            const token = localStorage.getItem('crowdManagementToken');
+            if (!token) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Display user info
+            const userData = JSON.parse(localStorage.getItem('crowdManagementUser') || '{}');
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            if (userData.name) {
+                welcomeMessage.textContent = `Welcome, ${userData.name}!`;
+            }
+            
+            // Load real system data
+            loadSystemOverview();
+            loadZonesData();
+            startRealTimeUpdates();
+        });
+        
+        // Load system overview from API
+        async function loadSystemOverview() {
+            try {
+                const overview = await makeAPICall('/system/overview');
+                updateDashboardStats(overview);
+            } catch (error) {
+                addToTerminal('❌ Failed to load system overview');
+            }
+        }
+        
+        // Load zones data
+        async function loadZonesData() {
+            try {
+                const zones = await makeAPICall('/zones');
+                addToTerminal(`📊 Loaded ${zones.length} zones from system`);
+            } catch (error) {
+                addToTerminal('❌ Failed to load zones data');
+            }
+        }
+        
+        // Update dashboard stats
+        function updateDashboardStats(overview) {
+            // Update the stats in the dashboard cards
+            const statsCard = document.querySelector('.dashboard-card:nth-child(2)');
+            if (statsCard) {
+                statsCard.innerHTML = `
+                    <h3>Live System Stats</h3>
+                    <p><strong>Total Zones:</strong> ${overview.totalZones}</p>
+                    <p><strong>Total Capacity:</strong> ${overview.totalCapacity.toLocaleString()} people</p>
+                    <p><strong>Current Occupancy:</strong> ${overview.totalCrowd.toLocaleString()} people</p>
+                    <p><strong>System Utilization:</strong> ${overview.overallUtilization.toFixed(1)}%</p>
+                    <p><strong>Critical Zones:</strong> ${overview.criticalZones}</p>
+                    <p><strong>Average Congestion:</strong> ${overview.averageCongestion.toFixed(1)}%</p>
+                `;
+            }
+        }
+        
+        // Start real-time updates
+        function startRealTimeUpdates() {
+            // Connect to Server-Sent Events for real-time updates
+            const eventSource = new EventSource('/api/events');
+            
+            eventSource.onmessage = function(event) {
+                try {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'system-update') {
+                        updateDashboardStats(data.data);
+                        addToTerminal(`📊 Real-time update: ${data.data.overallUtilization.toFixed(1)}% utilization`);
+                    }
+                } catch (error) {
+                    console.error('Error parsing real-time data:', error);
+                }
+            };
+            
+            eventSource.onerror = function(error) {
+                console.error('EventSource failed:', error);
+                addToTerminal('❌ Real-time connection lost');
+            };
+        }
+
+        // Terminal functionality
+        let terminalOutput = document.getElementById('terminalOutput');
+        
+        function addToTerminal(text) {
+            terminalOutput.textContent += text + '\n';
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+
+        function clearTerminal() {
+            terminalOutput.textContent = 'Terminal cleared.\n> ';
+        }
+
+        // Demo functions with real API calls
+        async function runFullDemo() {
+            addToTerminal('🎬 Starting full system demonstration...');
+            
+            try {
+                // Get system overview
+                const overview = await makeAPICall('/system/overview');
+                addToTerminal(`📊 System loaded: ${overview.totalZones} zones, ${overview.totalCapacity} capacity`);
+                
+                // Add crowd to a zone
+                await makeAPICall('/zones/SEC1/crowd', {
+                    method: 'POST',
+                    body: JSON.stringify({ crowdSize: 50 })
+                });
+                addToTerminal('👥 Added 50 people to Section A');
+                
+                // Find evacuation route
+                const routeResponse = await makeAPICall('/evacuation/route', {
+                    method: 'POST',
+                    body: JSON.stringify({ fromZoneId: 'SEC1', crowdSize: 100 })
+                });
+                addToTerminal(`🔍 Evacuation route: ${routeResponse.route.path.map(z => z.name).join(' → ')}`);
+                
+                // Redistribute crowd
+                const redistResponse = await makeAPICall('/crowd/redistribute', {
+                    method: 'POST',
+                    body: JSON.stringify({ fromZoneId: 'SEC1', crowdSize: 30 })
+                });
+                addToTerminal(`🔄 ${redistResponse.message}`);
+                
+                addToTerminal('🎉 Full demo completed!\n> ');
+            } catch (error) {
+                addToTerminal(`❌ Demo failed: ${error.message}\n> `);
+            }
+        }
+
+        async function runPathfindingDemo() {
+            addToTerminal('🔍 BFS Pathfinding Demo Started...');
+            
+            try {
+                const routeResponse = await makeAPICall('/evacuation/route', {
+                    method: 'POST',
+                    body: JSON.stringify({ fromZoneId: 'SEC1', crowdSize: 50 })
+                });
+                
+                addToTerminal('Algorithm: Breadth-First Search');
+                addToTerminal(`Path found: ${routeResponse.route.path.map(z => z.name).join(' → ')}`);
+                addToTerminal(`Distance: ${routeResponse.route.distance} zones`);
+                addToTerminal(`Congestion Score: ${routeResponse.route.congestionScore.toFixed(1)}`);
+                addToTerminal('✅ Pathfinding demo completed!\n> ');
+            } catch (error) {
+                addToTerminal(`❌ Pathfinding failed: ${error.message}\n> `);
+            }
+        }
+
+        async function runEvacuationDemo() {
+            addToTerminal('🚨 EMERGENCY EVACUATION INITIATED');
+            
+            try {
+                const evacuationResponse = await makeAPICall('/emergency/evacuate', {
+                    method: 'POST'
+                });
+                
+                addToTerminal('📋 EVACUATION PLAN GENERATED:');
+                evacuationResponse.plan.forEach((plan, index) => {
+                    addToTerminal(`${index + 1}. ${plan.zone} (${plan.crowd} people) → ${plan.route.join(' → ')} [${plan.priority}]`);
+                });
+                addToTerminal('✅ Emergency evacuation plan ready!\n> ');
+            } catch (error) {
+                addToTerminal(`❌ Evacuation failed: ${error.message}\n> `);
+            }
+        }
+
+        async function runMonitoringDemo() {
+            addToTerminal('📊 Starting real-time monitoring...');
+            
+            try {
+                await makeAPICall('/monitoring/start', {
+                    method: 'POST',
+                    body: JSON.stringify({ interval: 2000 })
+                });
+                addToTerminal('✅ Monitoring started successfully');
+                
+                setTimeout(async () => {
+                    try {
+                        await makeAPICall('/monitoring/stop', { method: 'POST' });
+                        addToTerminal('📊 Monitoring demo completed!\n> ');
+                    } catch (error) {
+                        addToTerminal(`❌ Stop monitoring failed: ${error.message}\n> `);
+                    }
+                }, 10000);
+            } catch (error) {
+                addToTerminal(`❌ Monitoring failed: ${error.message}\n> `);
+            }
+        }
+
+        async function runSimulationDemo() {
+            addToTerminal('🎭 Starting crowd flow simulation...');
+            
+            try {
+                await makeAPICall('/simulation/start', {
+                    method: 'POST',
+                    body: JSON.stringify({ duration: 10000, interval: 1000 })
+                });
+                addToTerminal('✅ Crowd flow simulation started');
+                addToTerminal('Duration: 10 seconds, updating every second');
+                
+                setTimeout(() => {
+                    addToTerminal('🎭 Simulation completed!\n> ');
+                }, 11000);
+            } catch (error) {
+                addToTerminal(`❌ Simulation failed: ${error.message}\n> `);
+            }
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('crowdManagementLoggedIn');
+            localStorage.removeItem('crowdManagementLoginTime');
+            localStorage.removeItem('crowdManagementUser');
+            localStorage.removeItem('crowdManagementToken');
+            window.location.href = 'index.html';
+        }
+
+        // Simulate real-time updates
+        setInterval(() => {
+            const now = new Date().toLocaleTimeString();
+            // Simulate random system activity
+            if (Math.random() < 0.1) { // 10% chance every 5 seconds
+                const activities = [
+                    'Zone capacity updated',
+                    'BFS pathfinding completed',
+                    'Crowd movement detected',
+                    'System performance optimal',
+                    'Emergency routes recalculated'
+                ];
+                const activity = activities[Math.floor(Math.random() * activities.length)];
+                addToTerminal(`[${now}] ${activity}`);
+            }
+        }, 5000);
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                clearTerminal();
+            }
+        });
+    </script>
+</body>
+</html>

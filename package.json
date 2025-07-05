@@ -1,0 +1,42 @@
+{
+  "name": "crowd-management-system",
+  "version": "1.0.0",
+  "description": "A sophisticated crowd management system using zone-based BFS graph traversal for optimal pathfinding, crowd flow analysis, and emergency evacuation planning.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "demo": "node index.js --demo",
+    "test": "node test.js",
+    "cli": "node index.js"
+  },
+  "keywords": [
+    "crowd-management",
+    "bfs",
+    "graph-traversal",
+    "pathfinding",
+    "evacuation",
+    "zone-based",
+    "emergency-planning",
+    "crowd-control"
+  ],
+  "author": "Ayush Kumar",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/crowd-management-system.git"
+  },
+  "bin": {
+    "crowd-management": "./index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
