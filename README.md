@@ -1,4 +1,4 @@
-# Crowd Management System
+# Crowd Managing System
 
 A sophisticated crowd management system using **zone-based BFS graph traversal** for optimal pathfinding, crowd flow analysis, and emergency evacuation planning.
 
