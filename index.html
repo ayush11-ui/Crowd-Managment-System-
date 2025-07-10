@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowd Management Simulation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Peace+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Crowd Management Simulation</h1>
+        
+        <div class="controls">
+            <button id="nextStepBtn" class="btn">Next Step</button>
+            <button id="autoRunBtn" class="btn">Auto Run</button>
+            <button id="resetBtn" class="btn">Reset</button>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color person"></div>
+                <span>People (Blue)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color exit"></div>
+                <span>Exit (Green)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color obstacle"></div>
+                <span>Obstacle (Black)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color congestion"></div>
+                <span>Congestion (White to Red)</span>
+            </div>
+        </div>
+        
+        <div class="grid-container">
+            <div id="grid" class="grid"></div>
+        </div>
+        
+        <div class="info">
+            <div class="info-item">
+                <span>Step: <span id="stepCounter">0</span></span>
+            </div>
+            <div class="info-item">
+                <span>People Remaining: <span id="peopleCounter">0</span></span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
