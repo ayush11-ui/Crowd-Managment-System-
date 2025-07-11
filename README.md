@@ -207,8 +207,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 - **Author**: Ayush Kumar
-- **Email**: [your-email@example.com]
-- **GitHub**: [https://github.com/yourusername]
+- **Email**: ash43890@gmail.com 
+- **GitHub**: https://github.com/ayush11-ui
 
 ---
 
